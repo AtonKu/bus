@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.dao.UserMapper">
+	<select id="seleceUserByUserName" parameterType="string" resultType="com.edu.entity.User">
+		select userName, passWord, roleType, createTime, idDel from user where userName=#{userName}
+	</select>
+
+    <select id="findNumsOfLoginName" parameterType="string" resultType="int">
+        select count(*) from user where userName=#{loginName}
+    </select>
+
+    <insert id="insertUser" parameterType="com.edu.entity.User">
+        insert into user
+        (userName, passWord, roleType, createTime, idDel)
+        VALUES
+        (#{userName}, #{passWord}, #{roleType}, #{createTime}, #{idDel})
+    </insert>
+
+    <select id="seleceUserByParams" parameterType="map" resultType="com.edu.entity.User">
+        select userName, passWord, roleType, createTime, idDel from user where userName=#{loginname} and passWord=#{password} and roleType=#{type}
+    </select>
+
+    <select id="selectUsersByRoleType" parameterType="int" resultType="map">
+        select userName, passWord, roleType, createTime, idDel, age, classes, realName from user where roleType=#{type}
+    </select>
+</mapper>
